@@ -15,7 +15,8 @@ class CreateOrganisasiTable extends Migration
     {
         Schema::create('organisasi', function (Blueprint $table) {
             $table->id();
-            $table->string('nama');
+            $table->string('id_pelanggan');
+            $table->string('name');
             $table->unsignedBigInteger('parent_id')->nullable();
             $table->foreign('parent_id')
             ->references('id')

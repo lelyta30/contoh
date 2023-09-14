@@ -44,29 +44,69 @@
 			<div class="full">
 				<div style="display: inline-block;width: 460px;">
 					<table class="full mt-1 mb-1" style="margin-top: 50px;">
-						<tr>
-							<th width="100">Nama Lengkap :</th>
-							<td>{{$karyawan->nama}}</td>
+					<tr>
+							<th width="100">NO :</th>
+							<td>{{$karyawan->id}}</td>
 						</tr>
 						<tr>
-							<th>NIK :</th>
-							<td>{{$karyawan->nik}}</td>
+							<th width="100">ID :</th>
+							<td>{{$karyawan->id_pelanggan}}</td>
 						</tr>
 						<tr>
-							<th>Nomor KTP :</th>
-							<td>{{$karyawan->nomor_ktp}}</td>
+							<th width="100">NAME :</th>
+							<td>{{$karyawan->name}}</td>
 						</tr>
 						<tr>
-							<th>Telp :</th>
-							<td>{{$karyawan->telp}}</td>
+							<th width="100">ADDRESS :</th>
+							<td>{{$karyawan->address}}</td>
 						</tr>
 						<tr>
-							<th>Email :</th>
-							<td>{{$karyawan->email}}</td>
+							<th width="100">TARIFF :</th>
+							<td>{{$karyawan->tariff}}</td>
 						</tr>
 						<tr>
-							<th>Alamat</th>
-							<td>{{$karyawan->detail_alamat}}</td>
+							<th width="100">DAYA :</th>
+							<td>{{$karyawan->daya}}</td>
+						</tr>
+						<tr>
+							<th width="100">N.MTR :</th>
+							<td>{{$karyawan->no_meter}}</td>
+						</tr>
+						<tr>
+							<th width="100">M.MTR :</th>
+							<td>{{$karyawan->merk_meter}}</td>
+						</tr>
+						<tr>
+							<th width="100">T.MTR :</th>
+							<td>{{$karyawan->type_meter}}</td>
+						</tr>
+						<tr>
+							<th width="100">N.CM.DVC :</th>
+							<td>{{$karyawan->no_comm_device}}</td>
+						</tr>
+						<tr>
+							<th width="100">M.CM.DVC :</th>
+							<td>{{$karyawan->merk_comm_device}}</td>
+						</tr>
+						<tr>
+							<th width="100">T.CM.DVC :</th>
+							<td>{{$karyawan->type_comm_device}}</td>
+						</tr>
+						<tr>
+							<th>PORT :</th>
+							<td>{{$karyawan->port}}</td>
+						</tr>
+						<tr>
+							<th>PHONE :</th>
+							<td>{{$karyawan->phone}}</td>
+						</tr>
+						<tr>
+							<th>PROVIDER :</th>
+							<td>{{$karyawan->provider}}</td>
+						</tr>
+						<tr>
+							<th>IP</th>
+							<td>{{$karyawan->ip_address}}</td>
 						</tr>
 						<tr>
 							<th>Divisi</th>

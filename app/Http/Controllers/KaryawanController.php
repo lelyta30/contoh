@@ -4,11 +4,15 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Karyawan;
+use App\Contact;
+use Twilio\Rest\Client;
 use App\Organisasi;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Imports\KaryawanImport;
 use App\Exports\KaryawanExport;
 use App\Exports\TesExport;
+use Illuminate\Http\RedirectResponse;
+
 
 class KaryawanController extends Controller
 {
@@ -23,38 +27,53 @@ class KaryawanController extends Controller
 
     public function data(Request $request,$jenis)
     {
-        $jenis = str_replace('-', ' ', $jenis);
+        $jenis = str_replace ('-', ' ', $jenis);
     	$orderBy = 'karyawan.nik';
         switch($request->input('order.0.column')){
             case "1":
-                $orderBy = 'karyawan.nik';
+                $orderBy = 'karyawan.id_pelanggan';
                 break;
             case "2":
-                $orderBy = 'karyawan.nama';
+                $orderBy = 'karyawan.name';
                 break;
             case "3":
-                $orderBy = 'karyawan.nomor_ktp';
+                $orderBy = 'karyawan.address';
                 break;
             case "4":
-                $orderBy = 'karyawan.telp';
+                $orderBy = 'karyawan.tariff';
                 break;
             case "5":
-                $orderBy = 'organisasi.nama';
+                $orderBy = 'karyawan.daya';
                 break;
             case "6":
-                $orderBy = 'karyawan.email';
+                $orderBy = 'karyawan.no_meter';
                 break;
             case "7":
-                $orderBy = 'karyawan.detail_alamat';
+                $orderBy = 'karyawan.merk_meter';
                 break;
             case "8":
-                $orderBy = 'karyawan.foto';
+                $orderBy = 'karyawan.type_meter';
                 break;
             case "9":
-                $orderBy = 'karyawan.nomor_bpjs_kesehatan';
+                $orderBy = 'karyawan.no_comm_device';
                 break;
             case "10":
-                $orderBy = 'karyawan.nomor_bpjs_ketenagakerjaan';
+                $orderBy = 'karyawan.merk_comm_device';
+                break;
+            case "11":
+                $orderBy = 'karyawan.type_comm_device';
+                break;
+            case "12":
+                $orderBy = 'karyawan.port';
+                break;
+            case "13":
+                $orderBy = 'karyawan.phone';
+                break;
+            case "14":
+                $orderBy = 'karyawan.provider';
+                break;
+            case "15":
+                $orderBy = 'karyawan.ip_address';
                 break;
         }
 
@@ -68,13 +87,12 @@ class KaryawanController extends Controller
 
         if($request->input('search.value')!=null){
             $data = $data->where(function($q)use($request){
-                $q->whereRaw('LOWER(karyawan.nik) like ? ',['%'.strtolower($request->input('search.value')).'%'])
-                ->orWhereRaw('LOWER(karyawan.nama) like ? ',['%'.strtolower($request->input('search.value')).'%'])
-                ->orWhereRaw('LOWER(karyawan.nomor_ktp) like ? ',['%'.strtolower($request->input('search.value')).'%'])
-                ->orWhereRaw('LOWER(karyawan.telp) like ? ',['%'.strtolower($request->input('search.value')).'%'])
-                ->orWhereRaw('LOWER(karyawan.status) like ? ',['%'.strtolower($request->input('search.value')).'%'])
-                ->orWhereRaw('LOWER(karyawan.status) like ? ',['%'.strtolower($request->input('search.value')).'%'])
-                ->orWhereRaw('LOWER(organisasi.nama) like ? ',['%'.strtolower($request->input('search.value')).'%'])
+                $q->whereRaw('LOWER(karyawan.id_pelanggan) like ? ',['%'.strtolower($request->input('search.value')).'%'])
+                ->orWhereRaw('LOWER(karyawan.name) like ? ',['%'.strtolower($request->input('search.value')).'%'])
+                ->orWhereRaw('LOWER(karyawan.merk_meter) like ? ',['%'.strtolower($request->input('search.value')).'%'])
+                ->orWhereRaw('LOWER(karyawan.merk_comm_device) like ? ',['%'.strtolower($request->input('search.value')).'%'])
+                ->orWhereRaw('LOWER(karyawan.phone) like ? ',['%'.strtolower($request->input('search.value')).'%'])
+
                 ;
             });
         }
@@ -191,28 +209,64 @@ class KaryawanController extends Controller
         return response()->json(true);
     }    
 
-    public function downloadPdf(Request $request,$id)
-    {
-        $data['karyawan'] = Karyawan::select([
-            'karyawan.*',
-            'organisasi.nama as nama_organisasi'
-        ])
-        ->join('organisasi','organisasi.id','=','karyawan.organisasi_id')
-        ->find($id)
-        ;
-        $pdf = \PDF::loadView('pdf.karyawan', $data);
-        return $pdf->stream('karyawan.pdf');
-    }
+    // public function downloadPdf(Request $request,$id)
+    // {
+    //     $data['karyawan'] = Karyawan::select([
+    //         'karyawan.*',
+    //         'organisasi.nama as nama_organisasi'
+    //     ])
+    //     ->join('organisasi','organisasi.id','=','karyawan.organisasi_id')
+    //     ->find($id)
+    //     ;
+    //     $pdf = \PDF::loadView('pdf.karyawan', $data);
+    //     return $pdf->stream('karyawan.pdf');
+    // }
 
     public function getFoto(Request $request,$id)
     {
         $karyawan = Karyawan::whereNotNull('foto')->find($id);
         if($karyawan == null) abort(404);
         $path = storage_path('app/'.$karyawan->foto);
-        // $file = \Storage::get($path);
-        // $type = \Storage::mimeType($path);
-        // $response = \Response::make($file, 200)->header("Content-Type", $type);
-        // return $response;
+        $file = \Storage::get($path);
+        $type = \Storage::mimeType($path);
+        $response = \Response::make($file, 200)->header("Content-Type", $type);
+        return $response;
         return response()->file($path);
     }
+}
+public function store(Request $request)
+{
+    \Validator::make($request->all(), [
+        'phone' => 'required|unique:contacts|numeric'
+    ])->validate();
+
+    $contact = new Contact;
+    $contact->phone = $request->phone;
+    $contact->save();
+
+    $this->sendMessage('Contact registered successfully!!', $request->phone);
+    return back()->with(['success' => "{$request->phone} registered"]);
+}
+
+public function sendCustomMessage(Request $request)
+{
+    \Validator::make($request->all(), [
+        'contact' => 'required|array',
+        'body' => 'required',
+    ])->validate();
+    $recipients = $request->contact;
+
+    foreach ($recipients as $recipient) {
+        $this->sendMessage($request->body, $recipient);
+    }
+    return back()->with(['success' => "Message on its way to recipients!"]);
+}
+
+private function sendMessage($message, $recipients)
+{
+    $account_sid = getenv("TWILIO_SID");
+    $auth_token = getenv("TWILIO_AUTH_TOKEN");
+    $twilio_number = getenv("TWILIO_NUMBER");
+    $client = new Client($account_sid, $auth_token);
+    $client->messages->create($recipients, ['from' => $twilio_number, 'body' => $message]);
 }

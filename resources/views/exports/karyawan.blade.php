@@ -8,12 +8,22 @@
 			<th></th>
 		</tr>
 		<tr>
-			<th>NAMA</th>
-			<th>KTP</th>
-			<th>NIK</th>
-			<th>TELP</th>
-			<th>EMAIL</th>
-			<th>DETAIL ALAMAT</th>
+			<th>NO</th>
+			<th>ID</th>
+			<th>NAME</th>
+			<th>ADDRESS</th>
+			<th>TARIFF</th>
+			<th>DAYA</th>
+			<th>N.MTR</th>
+			<th>M.MTR</th>
+			<th>T.MTR</th>
+			<th>N.CM.DVC</th>
+			<th>M.CM.DVC</th>
+			<th>T.CM.DVC</th>
+			<th>PORT</th>
+			<th>PHONE</th>
+			<th>PROVIDER</th>
+			<th>IP</th>
 			<th>STATUS</th>
 			<th>BPJS KESEHATAN</th>
 			<th>BPJS KETENAGAKERJAAN</th>
@@ -23,12 +33,22 @@
 	<tbody>
 		@foreach($list_karyawan as $karyawan)
 		<tr>
-			<td>{{$karyawan->nama}}</td>
-			<td>{{$karyawan->nomor_ktp}}</td>
-			<td>{{$karyawan->nik}}</td>
-			<td>{{$karyawan->telp}}</td>
-			<td>{{$karyawan->email}}</td>
-			<td>{{$karyawan->detail_alamat}}</td>
+			<td>{{$karyawan->index + 1}}</td>
+			<td>{{$karyawan->id_pelanggan}}</td>
+            <td>{{$karyawan->name}}</td>
+            <td>{{$karyawan->address}}</td>
+            <td>{{$karyawan->tariff}}</td>
+            <td>{{$karyawan->daya}}</td>
+            <td>{{$karyawan->no_meter}}</td>
+            <td>{{$karyawan->merk_meter}}</td>
+            <td>{{$karyawan->type_meter}}</td>
+            <td>{{$karyawan->no_comm_device}}</td>
+            <td>{{$karyawan->merk_comm_device}}</td>
+            <td>{{$karyawan->type_comm_device}}</td>
+            <td>{{$karyawan->port}}</td>
+            <td>{{$karyawan->phone}}</td>
+            <td>{{$karyawan->provider}}</td>
+            <td>{{$karyawan->ip_address}}</td>			
 			<td>{{$karyawan->status}}</td>
 			<td>{{$karyawan->nomor_bpjs_kesehatan}}</td>
 			<td>{{$karyawan->nomor_bpjs_ketenagakerjaan}}</td>

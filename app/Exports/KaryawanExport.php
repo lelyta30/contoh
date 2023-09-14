@@ -24,16 +24,23 @@ class KaryawanExport implements FromQuery, WithHeadings, WithMapping
 	public function headings(): array
     {
         return [
-            'nama',
-			'nomor_ktp',
-			'nik',
-			'telp',
-			'email',
-			'detail_alamat',
-			'status',
-			'nomor_bpjs_kesehatan',
-			'nomor_bpjs_ketenagakerjaan',
-			'organisasi_id'
+            'id',
+            'id_pelanggan',
+            'name',
+            'address',
+            'tariff',
+            'daya',
+            'no_meter',
+            'merk_meter',
+            'type_meter',
+            'no_comm_device',
+            'merk_comm_device',
+            'type_comm_device',
+            'port',
+            'phone',
+            'provider',
+            'ip_address',
+            'status'
         ];
     }
     /**
@@ -42,16 +49,22 @@ class KaryawanExport implements FromQuery, WithHeadings, WithMapping
     public function map($karyawan): array
     {
         return [
-            $karyawan->nama,
-            $karyawan->nomor_ktp,
-            $karyawan->nik,
-            $karyawan->telp,
-            $karyawan->email,
-            $karyawan->detail_alamat,
+            $karyawan->id_pelanggan,
+            $karyawan->name,
+            $karyawan->address,
+            $karyawan->tariff,
+            $karyawan->daya,
+            $karyawan->no_meter,
+            $karyawan->merk_meter,
+            $karyawan->type_meter,
+            $karyawan->no_comm_device,
+            $karyawan->merk_comm_device,
+            $karyawan->type_comm_device,
+            $karyawan->port,
+            $karyawan->phone,
+            $karyawan->provider,
+            $karyawan->ip_address,
             $karyawan->status,
-            $karyawan->nomor_bpjs_kesehatan,
-            $karyawan->nomor_bpjs_ketenagakerjaan,
-            $karyawan->organisasi_id,
         ];
     }
 }

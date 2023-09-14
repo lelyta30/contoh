@@ -22,7 +22,7 @@ Route::group(['middleware'=>'auth'],function(){
 	Route::get('/',function(){
 		return redirect('/karyawan/aktif');
 	});
-	
+	Route::any('/karyawan/data/{jenis}','KaryawanController@data');
 	Route::any('/karyawan/data/{jenis}','KaryawanController@data');
 	Route::get('/karyawan/export','KaryawanController@exportData');
 	Route::post('/karyawan/export_terpilih','KaryawanController@exportDataTerpilih');
@@ -35,6 +35,7 @@ Route::group(['middleware'=>'auth'],function(){
 	Route::post('/karyawan/aktifkan','KaryawanController@aktifkanBanyak');
 	Route::get('/karyawan/download_pdf/{id}','KaryawanController@downloadPdf');
 	Route::get('/karyawan/foto/{id}','KaryawanController@getFoto');
+    Route::post('/karyawan/store', 'KaryawanController@store');
 
 	Route::any('/presensi/data','PresensiController@data');
 	Route::put('/presensi','PresensiController@importDataPresensi');
