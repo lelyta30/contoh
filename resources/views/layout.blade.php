@@ -99,7 +99,7 @@
             <a href="#" class="nav-link <?=$PARENTTAG=='karyawan'?'active':''?>">
               <i class="nav-icon fas fa-users"></i>
               <p>
-                Karyawan
+                Pelanggan
                 <i class="right fas fa-angle-left"></i>
               </p>
             </a>
@@ -107,13 +107,13 @@
               <li class="nav-item">
                 <a href="{{url('')}}/karyawan/aktif" class="nav-link <?=$CHILDTAG=='aktif'?'active':''?>">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>Karyawan Aktif</p>
+                  <p>Pelanggan Aktif</p>
                 </a>
               </li>
               <li class="nav-item">
                 <a href="{{url('')}}/karyawan/non-aktif" class="nav-link <?=$CHILDTAG=='non-aktif'?'active':''?>">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>Karyawan Non Aktif</p>
+                  <p>Pelanggan Non Aktif</p>
                 </a>
               </li>
             </ul>
@@ -171,14 +171,6 @@
     @yield('content')
     
   </div>
-  <!-- /.content-wrapper -->
-  <footer class="main-footer">
-    <strong>Copyright &copy; 2014-2019 <a href="http://adminlte.io">AdminLTE.io</a>.</strong>
-    All rights reserved.
-    <div class="float-right d-none d-sm-inline-block">
-      <b>Version</b> 3.0.5
-    </div>
-  </footer>
 
   <!-- Control Sidebar -->
   <aside class="control-sidebar control-sidebar-dark">

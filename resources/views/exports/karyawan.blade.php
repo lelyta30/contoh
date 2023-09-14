@@ -2,7 +2,7 @@
 	<thead>
 		<tr>
 			<th colspan="2" rowspan="2"></th>
-			<th colspan="5" style="text-align: center;"><strong>EXPORT DATA KARYAWAN</strong></th>
+			<th colspan="5" style="text-align: center;"><strong>EXPORT DATA PELANGGAN</strong></th>
 		</tr>
 		<tr>
 			<th></th>

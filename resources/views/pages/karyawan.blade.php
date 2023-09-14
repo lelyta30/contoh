@@ -13,12 +13,12 @@
     <div class="container-fluid">
       <div class="row mb-2">
         <div class="col-sm-6">
-          <h1 class="m-0 text-dark">Karyawan {{$jenis}}</h1>
+          <h1 class="m-0 text-dark">Pelanggan {{$jenis}}</h1>
         </div><!-- /.col -->
         <div class="col-sm-6">
           <ol class="breadcrumb float-sm-right">
             <li class="breadcrumb-item"><a href="#">Home</a></li>
-            <li class="breadcrumb-item active">Karyawan</li>
+            <li class="breadcrumb-item active">Pelanggan</li>
           </ol>
         </div><!-- /.col -->
       </div><!-- /.row -->
@@ -28,19 +28,19 @@
     <div class="container-fluid">
       <div class="row">
         <div class="col-md-12">
-        <button class="btn btn-primary" style="margin-bottom: 1rem;" data-toggle="modal" data-target="#modal-create">Tambah Karyawan</button>
+        <button class="btn btn-primary" style="margin-bottom: 1rem;" data-toggle="modal" data-target="#modal-create">Tambah Pelanggan</button>
           <button class="btn btn-primary" style="margin-bottom: 1rem;" data-toggle="modal" data-target="#modal-create-2" id="open-send-modal">Send</button>
-          <button class="btn btn-warning" style="margin-bottom: 1rem;" data-toggle="modal" data-target="#modal-import">Import Karyawan Excel</button>
-          <a download class="btn btn-success" style="margin-bottom: 1rem;" href="{{url('')}}/karyawan/export">Export Karyawan Excel</a>
+          <button class="btn btn-warning" style="margin-bottom: 1rem;" data-toggle="modal" data-target="#modal-import">Import Pelanggan Excel</button>
+          <a download class="btn btn-success" style="margin-bottom: 1rem;" href="{{url('')}}/karyawan/export">Export Pelanggan Excel</a>
           @if($CHILDTAG=='aktif')
           <button type="button" id="button-nonaktif-all" disabled onclick="nonAktifkanTerpilih()" class="btn btn-danger" style="margin-bottom: 1rem;">Non Aktifkan</button>
           @else
           <button type="button" id="button-aktif-all" disabled onclick="aktifkanTerpilih()" class="btn btn-danger" style="margin-bottom: 1rem;">Aktifkan</button>
           @endif
-          <button disabled type="button" class="btn btn-success" style="margin-bottom: 1rem;" id="button-export-terpilih" onclick="exportKaryawanTerpilih()">Export Karyawan Terpilih</button>
+          <button disabled type="button" class="btn btn-success" style="margin-bottom: 1rem;" id="button-export-terpilih" onclick="exportKaryawanTerpilih()">Export Pelanggan Terpilih</button>
           <div class="card">
             <div class="card-header">
-              <h3 class="card-title">Data Karyawan</h3>
+              <h3 class="card-title">Data Pelanggan</h3>
             </div>
             <div class="card-body">
               <div class="row" id="row-tampilan">
@@ -113,10 +113,10 @@
               </div>
               <div class="row">
                 <div class="col-md-12">
-                  <h4>Filter Karyawan</h4>
+                  <h4>Filter Pelanggan</h4>
                 </div>
                 <div class="col-md-4">
-                  <label>Organisasi</label>
+                  <label>MERK METER</label>
                   <select id="filter-organisasi" class="form-control filter">
                     <option value="">Pilih Organisasi</option>
                     @foreach($list_organisasi as $organisasi)
@@ -125,7 +125,7 @@
                   </select>
                 </div>
                 <div class="col-md-4">
-                  <label>BPJS Kesehatan</label>
+                  <label>MERK COMM DEVICE</label>
                   <select id="filter-bpjs-kesehatan" class="form-control filter">
                     <option value="">Filter BPJS Kesehatan</option>
                     <option value="1">BPJS Kesehatan Terdaftar</option>
@@ -182,7 +182,7 @@
     <div class="modal-dialog modal-lg">
       <form method="post" id="form-create" action="{{url('karyawan')}}" enctype="multipart/form-data" class="modal-content">
         <div class="modal-header">
-          <h4 class="modal-title">Tambah Data Karyawan Baru</h4>
+          <h4 class="modal-title">Tambah Data Pelanggan Baru</h4>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
@@ -341,7 +341,7 @@
     <div class="modal-dialog modal-lg">
       <form method="post" id="form-edit" action="{{url('karyawan')}}" enctype="multipart/form-data" class="modal-content">
         <div class="modal-header">
-          <h4 class="modal-title">Edit Data Karyawan Baru</h4>
+          <h4 class="modal-title">Edit Data Pelanggan Baru</h4>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
@@ -452,7 +452,7 @@
     <div class="modal-dialog modal-lg">
       <form method="post" id="form-import" action="{{url('karyawan')}}" enctype="multipart/form-data" class="modal-content">
         <div class="modal-header">
-          <h4 class="modal-title">Import Data Karyawan</h4>
+          <h4 class="modal-title">Import Data Pelanggan</h4>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
@@ -462,10 +462,10 @@
           {{csrf_field()}}
           <div class="row">
             <div class="col-md-12">
-              <p>Import data karyawan sesuai format contoh berikut.<br/><a href="{{url('')}}/excel-karyawan.xlsx"><i class="fas fa-download"></i> File Contoh Excel Karyawan</a></p>
+              <p>Import data Pelanggan sesuai format contoh berikut.<br/><a href="{{url('')}}/excel-karyawan.xlsx"><i class="fas fa-download"></i> File Contoh Excel Karyawan</a></p>
             </div>
             <div class="col-md-12">
-              <label>File Excel Karyawan</label>
+              <label>File Excel Pelanggan</label>
               <input type="file" name="excel-karyawan" required>
             </div>
           </div>
@@ -742,7 +742,7 @@ return tampilan;
     $("#form-edit").ajaxSubmit({
       success:function(res){
         if(res===true){
-          alert("BERHASIL UPDATE KARYAWAN")
+          alert("BERHASIL UPDATE PELANGGAN")
           table.ajax.reload(null,false)
           $("#modal-edit").modal('hide')
         }
