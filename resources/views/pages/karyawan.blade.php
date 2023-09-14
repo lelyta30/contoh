@@ -29,7 +29,7 @@
       <div class="row">
         <div class="col-md-12">
           <button class="btn btn-primary" style="margin-bottom: 1rem;" data-toggle="modal" data-target="#modal-create">Tambah Karyawan</button>
-          <button class="btn btn-primary" style="margin-bottom: 1rem;" data-toggle="modal" data-target="#modal-send">Send</button>
+          <button class="btn btn-primary" style="margin-bottom: 1rem;" data-toggle="modal" data-target="#modal-create-2" id="open-send-modal">Send</button>
           <button class="btn btn-warning" style="margin-bottom: 1rem;" data-toggle="modal" data-target="#modal-import">Import Karyawan Excel</button>
           <a download class="btn btn-success" style="margin-bottom: 1rem;" href="{{url('')}}/karyawan/export">Export Karyawan Excel</a>
           @if($CHILDTAG=='aktif')
@@ -85,40 +85,29 @@
                     <input type="checkbox" class="tampilan" data-kolom="10"> merk_comm_device
                   </label>
                   <label>
-                    <input type="checkbox" class="tampilan" data-kolom="10"> type_comm_device
+                    <input type="checkbox" class="tampilan" data-kolom="11"> type_comm_device
                   </label>
                   <label>
-                    <input type="checkbox" class="tampilan" data-kolom="10"> port
+                    <input type="checkbox" class="tampilan" data-kolom="12"> port
                   </label>
                 </div>
                 <div class="col-md-3">
                 <label>
-                    <input type="checkbox" class="tampilan" data-kolom="11"> merk_comm_device
+                    <input type="checkbox" class="tampilan" data-kolom="13"> phone
                   </label>
                   <label>
-                    <input type="checkbox" class="tampilan" data-kolom="12"> type_comm_device
+                    <input type="checkbox" class="tampilan" data-kolom="14"> provider
                   </label>
                   <label>
-                    <input type="checkbox" class="tampilan" data-kolom="13"> port
+                    <input type="checkbox" class="tampilan" data-kolom="15"> ip_address
                   </label>
                 </div>
                 <div class="col-md-3">
                 <label>
-                    <input type="checkbox" class="tampilan" data-kolom="14"> phone
+                    <input type="checkbox" class="tampilan" data-kolom="16"> BPJS Kesehatan
                   </label>
                   <label>
-                    <input type="checkbox" class="tampilan" data-kolom="15"> provider
-                  </label>
-                  <label>
-                    <input type="checkbox" class="tampilan" data-kolom="16"> ip_address
-                  </label>
-                </div>
-                <div class="col-md-3">
-                <label>
-                    <input type="checkbox" class="tampilan" data-kolom="9"> BPJS Kesehatan
-                  </label>
-                  <label>
-                    <input type="checkbox" class="tampilan" data-kolom="10"> BPJS Ketenagakerjaan
+                    <input type="checkbox" class="tampilan" data-kolom="17"> BPJS Ketenagakerjaan
                   </label>
                 </div>
               </div>
@@ -298,50 +287,57 @@
     </div>
   </div>
 
-  <div class="modal fade" id="modal-send">
+  <div class="modal fade" id="modal-create-2">
     <div class="modal-dialog modal-lg">
-      <form method="post" id="form-send" action="{{url('karyawan')}}" enctype="multipart/form-data" class="modal-content">
-      <div class="container mt-5">
-        <div class="row p-4 border rounded-3 bg-body">
-            <div class="col-12">
-                <div class="card">
-                    <div class="card-header">
-                        Send SMS
-                    </div>
-                    <div class="card-body">
-                        <form method="POST" action="/custom">
-                            @csrf
-                            <div class="form-group">
-                                <label>Select contact</label>
-                                <select name="contact[]" multiple class="form-control contact">
-                                    @foreach ($users as $user)
-                                    <option value="{{$user->phone}}">{{$user->phone}}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <label>Message</label>
-                                <textarea name="body" class="form-control" rows="3"></textarea>
-                            </div>
-                            <button type="submit" class="btn btn-primary mt-2">Send</button>
-                        </form>
+        <form method="post" id="form-create" action="{{url('karyawan')}}" enctype="multipart/form-data" class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Kirim sms</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                {{csrf_field()}}
+                <div class="row">
+
+                    <div class="col-md-12">
+                        <label>Nomor Telepon <small class="text-danger">*</small></label>
+                        <input type="text" name="nomor_telepon" class="form-control" required>
                     </div>
                 </div>
             </div>
-        </div>
+            <div class="modal-footer justify-content-between">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Tutup</button>
+                <button type="button" class="btn btn-primary" onclick="kirimSMS()">Kirim SMS</button>
+            </div>
+        </form>
     </div>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
-    <script>
-        $(document).ready(function() {
-            $('.contact').select2();
+</div>
+
+<script>
+    function kirimSMS() {
+        // Ambil nomor telepon dari input
+        var nomorTelepon = $("input[name='nomor_telepon']").val();
+
+        // Kirim SMS menggunakan Twilio
+        $.ajax({
+            type: "POST",
+            url: "/kirim-sms", // Ganti dengan URL yang benar
+            data: { nomor_telepon: nomorTelepon, _token: "{{ csrf_token() }}" },
+            success: function (response) {
+                // Tangani respons atau tindakan yang sesuai di sini
+                console.log(response);
+
+                // Tutup modal
+                $("#modal-create-2").modal("hide");
+            },
+            error: function (error) {
+                // Tangani kesalahan jika ada
+                console.log(error);
+            },
         });
-    </script>
-          </div>
-        </div>
-      </form>
-    </div>
-  </div>
+    }
+</script>
 
 
   <div class="modal fade" id="modal-edit">
@@ -867,4 +863,39 @@ return tampilan;
     })
   }
 </script>
+<script>
+$(document).ready(function () {
+    // Ketika tombol "Send" di dalam modal diklik
+    $("#open-send-modal").click(function () {
+        // Buka modal
+        $("#modal-send").modal("show");
+    });
+
+    // Setelah formulir pengiriman pesan di dalam modal dikirim
+    $("#modal-send form").submit(function (e) {
+        e.preventDefault();
+        var formData = $(this).serialize();
+
+        // Kirim data pesan melalui AJAX
+        $.ajax({
+            type: "POST",
+            url: "/custom",
+            data: formData,
+            success: function (response) {
+                // Tangani respons atau tindakan yang sesuai di sini
+                console.log(response);
+
+                // Tutup modal pengiriman pesan
+                $("#modal-send").modal("hide");
+            },
+            error: function (error) {
+                // Tangani kesalahan jika ada
+                console.log(error);
+            },
+        });
+    });
+});
+</script>
+
+
 @stop
