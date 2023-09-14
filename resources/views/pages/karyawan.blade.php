@@ -28,7 +28,7 @@
     <div class="container-fluid">
       <div class="row">
         <div class="col-md-12">
-          <button class="btn btn-primary" style="margin-bottom: 1rem;" data-toggle="modal" data-target="#modal-create">Tambah Karyawan</button>
+        <button class="btn btn-primary" style="margin-bottom: 1rem;" data-toggle="modal" data-target="#modal-create">Tambah Karyawan</button>
           <button class="btn btn-primary" style="margin-bottom: 1rem;" data-toggle="modal" data-target="#modal-create-2" id="open-send-modal">Send</button>
           <button class="btn btn-warning" style="margin-bottom: 1rem;" data-toggle="modal" data-target="#modal-import">Import Karyawan Excel</button>
           <a download class="btn btn-success" style="margin-bottom: 1rem;" href="{{url('')}}/karyawan/export">Export Karyawan Excel</a>
@@ -45,7 +45,7 @@
             <div class="card-body">
               <div class="row" id="row-tampilan">
                 <div class="col-md-12">
-                  <h4>Pilih Tampilan</h4>
+                <h4>Pilih Tampilan</h4>
                 </div>
                 <div class="col-md-3">
                   <label>
@@ -188,9 +188,7 @@
           </button>
         </div>
         <div class="modal-body">
-          {{csrf_field()}}
-          <div class="row">
-          <div class="col-md-12">
+        <div class="col-md-12">
               <label>ID_PELANGGAN <small class="text-danger">*</small></label>
               <input type="text" name="id_pelanggan" class="form-control" required>
             </div>
@@ -286,7 +284,7 @@
       </form>
     </div>
   </div>
-
+  
   <div class="modal fade" id="modal-create-2">
     <div class="modal-dialog modal-lg">
         <form method="post" id="form-create" action="{{url('karyawan')}}" enctype="multipart/form-data" class="modal-content">
@@ -338,7 +336,6 @@
         });
     }
 </script>
-
 
   <div class="modal fade" id="modal-edit">
     <div class="modal-dialog modal-lg">
@@ -831,8 +828,8 @@ return tampilan;
         $("#head-cb").prop('checked',false)
       }
     })
-    // console.log(semua_id)
-    // console.log("YANG TERPILIH AKAN DINONAKTIFKAN")
+    console.log(semua_id)
+    console.log("YANG TERPILIH AKAN DINONAKTIFKAN")
   }
 
   $(".filter").on('change',function(){
@@ -863,39 +860,4 @@ return tampilan;
     })
   }
 </script>
-<script>
-$(document).ready(function () {
-    // Ketika tombol "Send" di dalam modal diklik
-    $("#open-send-modal").click(function () {
-        // Buka modal
-        $("#modal-send").modal("show");
-    });
-
-    // Setelah formulir pengiriman pesan di dalam modal dikirim
-    $("#modal-send form").submit(function (e) {
-        e.preventDefault();
-        var formData = $(this).serialize();
-
-        // Kirim data pesan melalui AJAX
-        $.ajax({
-            type: "POST",
-            url: "/custom",
-            data: formData,
-            success: function (response) {
-                // Tangani respons atau tindakan yang sesuai di sini
-                console.log(response);
-
-                // Tutup modal pengiriman pesan
-                $("#modal-send").modal("hide");
-            },
-            error: function (error) {
-                // Tangani kesalahan jika ada
-                console.log(error);
-            },
-        });
-    });
-});
-</script>
-
-
 @stop
