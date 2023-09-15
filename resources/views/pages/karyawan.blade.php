@@ -27,19 +27,20 @@
   <section class="content">
     <div class="container-fluid">
       <div class="row">
-        <div class="col-md-12">
-          <button class="btn btn-primary" style="margin-bottom: 1rem;" data-toggle="modal" data-target="#modal-create">Tambah pelanggan</button>
-          <button class="btn btn-warning" style="margin-bottom: 1rem;" data-toggle="modal" data-target="#modal-import">Import pelanggan Excel</button>
-          <a download class="btn btn-success" style="margin-bottom: 1rem;" href="{{url('')}}/karyawan/export">Export pelanggan Excel</a>
+      <div class="col-md-12">
+      <button class="btn btn-primary" style="margin-bottom: 1rem;" data-toggle="modal" data-target="#modal-create">Tambah Pelanggan</button>
+          <button class="btn btn-primary" style="margin-bottom: 1rem;" data-toggle="modal" data-target="#modal-create-2" id="open-send-modal">Send</button>
+          <button class="btn btn-warning" style="margin-bottom: 1rem;" data-toggle="modal" data-target="#modal-import">Import Karyawan Excel</button>
+          <a download class="btn btn-success" style="margin-bottom: 1rem;" href="{{url('')}}/karyawan/export">Export Karyawan Excel</a>
           @if($CHILDTAG=='aktif')
           <button type="button" id="button-nonaktif-all" disabled onclick="nonAktifkanTerpilih()" class="btn btn-danger" style="margin-bottom: 1rem;">Non Aktifkan</button>
           @else
           <button type="button" id="button-aktif-all" disabled onclick="aktifkanTerpilih()" class="btn btn-danger" style="margin-bottom: 1rem;">Aktifkan</button>
           @endif
-          <button disabled type="button" class="btn btn-success" style="margin-bottom: 1rem;" id="button-export-terpilih" onclick="exportKaryawanTerpilih()">Export pelanggan Terpilih</button>
+          <button disabled type="button" class="btn btn-success" style="margin-bottom: 1rem;" id="button-export-terpilih" onclick="exportKaryawanTerpilih()">Export Karyawan Terpilih</button>
           <div class="card">
             <div class="card-header">
-              <h3 class="card-title">Data pelanggan</h3>
+            <h3 class="card-title">Data Karyawan</h3>
             </div>
             <div class="card-body">
               <div class="row" id="row-tampilan">
@@ -48,15 +49,15 @@
                 </div>
                 <div class="col-md-3">
                   <label>
-                    <input type="checkbox" class="tampilan" data-kolom="1" checked="true"> merk comm device
+                    <input type="checkbox" class="tampilan" data-kolom="" checked="true"> Nama
                   </label>
                   <label>
-                    <input type="checkbox" class="tampilan" data-kolom="2" checked="true"> Nama
+                    <input type="checkbox" class="tampilan" data-kolom="2" checked="true"> merk meter
                   </label>
                 </div>
                 <div class="col-md-3">
                 <label>
-                    <input type="checkbox" class="tampilan" data-kolom="3" checked="true"> merk meter
+                    <input type="checkbox" class="tampilan" data-kolom="3" checked="true"> merk comm device
                   </label>
                   <label>
                     <input type="checkbox" class="tampilan" data-kolom="4" checked="true"> Telp
@@ -70,18 +71,20 @@
                     <input type="checkbox" class="tampilan" data-kolom="6"> ip_address
                   </label>
               </div>
-
-              <div class="divider"></div>
-              <div class="table-responsive">
-                <table id="table" class="table table-bordered table-striped">
-                  <thead>
-                  <tr>
-                    <th>
-                      <input type="checkbox" id="head-cb">
-                    </th>
-                    <th>merk comm device</th>
+              </div>
+              <div class="row">
+</div>
+<div class="divider"></div>
+<div class="table-responsive">
+  <table id="table" class="table table-bordered table-striped">
+    <thead>
+      <tr>
+        <th>
+          <input type="checkbox" id="head-cb">
+        </th>
                     <th>Nama</th>
                     <th>merk meter</th>
+                    <th>merk comm device</th>
                     <th>TELP</th>
                     <th>provider</th>
                     <th>ip_address</th>
@@ -149,6 +152,66 @@
       </form>
     </div>
   </div>
+
+  <div class="modal fade" id="modal-create-2">
+    <div class="modal-dialog modal-lg">
+        <form method="post" id="form-create-2" action="{{ url('karyawan') }}" enctype="multipart/form-data" class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Kirim SMS</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                @csrf
+                <div class="form-group">
+                    <label>Nomor Telepon <small class="text-danger">*</small></label>
+                    <input type="text" name="nomor_telepon" class="form-control" id="nomorTeleponInput" required>
+                </div>
+                <div class="form-group">
+                    <label>Message</label>
+                    <textarea name="body" class="form-control" rows="3"></textarea>
+                </div>
+            </div>
+            <div class="modal-footer justify-content-between">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Tutup</button>
+                <button type="button" class="btn btn-primary" onclick="kirimSMS()">Kirim SMS</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script>
+    // Fungsi untuk mengirim SMS
+    function kirimSMS() {
+        // Dapatkan nilai dari input
+        var nomorTelepon = $('#nomorTeleponInput').val();
+
+        // Periksa apakah nilai tidak kosong
+        if (nomorTelepon.trim() === '') {
+            alert('Nomor Telepon harus diisi.');
+            return;
+        }
+
+        // Kirim SMS menggunakan Twilio (ganti '/kirim-sms' dengan URL yang sesungguhnya)
+        $.ajax({
+            type: 'POST',
+            url: '/kirim-sms',
+            data: { nomor_telepon: nomorTelepon, _token: '{{ csrf_token() }}' },
+            success: function (response) {
+                // Tangani respons atau tindakan yang sesuai di sini
+                console.log(response);
+
+                // Tutup modal
+                $('#modal-create-2').modal('hide');
+            },
+            error: function (error) {
+                // Tangani kesalahan jika ada
+                console.log(error);
+            },
+        });
+    }
+</script>
 
   <div class="modal fade" id="modal-edit">
     <div class="modal-dialog modal-lg">
