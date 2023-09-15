@@ -64,10 +64,6 @@
 							<th>provider :</th>
 							<td>{{$karyawan->provider}}</td>
 						</tr>
-						<tr>
-							<th>Divisi</th>
-							<td>{{$karyawan->nama_organisasi}}</td>
-						</tr>
 					</table>
 				</div>
 				<?php

@@ -119,22 +119,6 @@
             </ul>
           </li>
           <li class="nav-item">
-            <a href="{{url('')}}/presensi" class="nav-link <?=$PARENTTAG=='presensi'?'active':''?>">
-              <i class="nav-icon fas fa-chevron-right"></i>
-              <p>
-                Presensi
-              </p>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a href="{{url('')}}/struktur_organisasi" class="nav-link <?=$PARENTTAG=='organisasi'?'active':''?>">
-              <i class="nav-icon fas fa-chevron-right"></i>
-              <p>
-                Struktur Organisasi
-              </p>
-            </a>
-          </li>
-          <li class="nav-item">
             <a href="{{url('')}}/user" class="nav-link <?=$PARENTTAG=='user'?'active':''?>">
               <i class="nav-icon fas fa-chevron-right"></i>
               <p>

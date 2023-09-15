@@ -53,57 +53,24 @@
                   <label>
                     <input type="checkbox" class="tampilan" data-kolom="2" checked="true"> Nama
                   </label>
-                  <label>
-                    <input type="checkbox" class="tampilan" data-kolom="3" checked="true"> merk meter
-                  </label>
                 </div>
                 <div class="col-md-3">
+                <label>
+                    <input type="checkbox" class="tampilan" data-kolom="3" checked="true"> merk meter
+                  </label>
                   <label>
                     <input type="checkbox" class="tampilan" data-kolom="4" checked="true"> Telp
                   </label>
+                  </div>
+                  <div class="col-md-3">
                   <label>
-                    <input type="checkbox" class="tampilan" data-kolom="5" checked="true"> Organisasi
+                    <input type="checkbox" class="tampilan" data-kolom="5" checked="true"> provider
                   </label>
                   <label>
-                    <input type="checkbox" class="tampilan" data-kolom="6"> provider
+                    <input type="checkbox" class="tampilan" data-kolom="6"> ip_address
                   </label>
-                </div>
-                <div class="col-md-3">
-                  <label>
-                    <input type="checkbox" class="tampilan" data-kolom="7"> ip_address
-                  </label>
-                </div>
               </div>
-              <div class="row">
-                <div class="col-md-12">
-                  <h4>Filter pelanggan</h4>
-                </div>
-                <div class="col-md-4">
-                  <label>Organisasi</label>
-                  <select id="filter-organisasi" class="form-control filter">
-                    <option value="">Pilih Organisasi</option>
-                    @foreach($list_organisasi as $organisasi)
-                    <option value="{{$organisasi->id}}">{{$organisasi->nama}}</option>
-                    @endforeach
-                  </select>
-                </div>
-                <div class="col-md-4">
-                  <label>BPJS Kesehatan</label>
-                  <select id="filter-bpjs-kesehatan" class="form-control filter">
-                    <option value="">Filter BPJS Kesehatan</option>
-                    <option value="1">BPJS Kesehatan Terdaftar</option>
-                    <option value="0">BPJS Kesehatan Belum Terdaftar</option>
-                  </select>
-                </div>
-                <div class="col-md-4">
-                  <label>BPJS Ketenagakerjaan</label>
-                  <select id="filter-bpjs-ketenagakerjaan" class="form-control filter">
-                    <option value="">Filter BPJS Ketenagakerjaan</option>
-                    <option value="1">BPJS Ketenagakerjaan Terdaftar</option>
-                    <option value="0">BPJS Ketenagakerjaan Belum Terdaftar</option>
-                  </select>
-                </div>
-              </div>
+
               <div class="divider"></div>
               <div class="table-responsive">
                 <table id="table" class="table table-bordered table-striped">
@@ -116,7 +83,6 @@
                     <th>Nama</th>
                     <th>merk meter</th>
                     <th>TELP</th>
-                    <th>ORGANISASI</th>
                     <th>provider</th>
                     <th>ip_address</th>
                     <th>###</th>
@@ -171,15 +137,6 @@
                 <option value="non aktif">Non Aktif</option>
               </select>
             </div>
-            <div class="col-md-12">
-              <label>Organisasi</label>
-              <select name="organisasi_id" class="form-control" required>
-                <option value="">Pilih Organisasi</option>
-                @foreach($list_organisasi as $organisasi)
-                <option value="{{$organisasi->id}}">{{$organisasi->nama}}</option>
-                @endforeach
-              </select>
-            </div>
             <div class="col-md-12" style="margin-top: 4px;">
               <input type="file" name="ip_address" accept="image/*">
             </div>
@@ -232,15 +189,6 @@
               <select name="status" class="form-control" required>
                 <option value="aktif">Aktif</option>
                 <option value="non aktif">Non Aktif</option>
-              </select>
-            </div>
-            <div class="col-md-12">
-              <label>Organisasi</label>
-              <select name="organisasi_id" class="form-control" required>
-                <option value="">Pilih Organisasi</option>
-                @foreach($list_organisasi as $organisasi)
-                <option value="{{$organisasi->id}}">{{$organisasi->nama}}</option>
-                @endforeach
               </select>
             </div>
             <div class="col-md-12" style="margin-top: 4px;">
@@ -368,18 +316,11 @@
         "targets": 5,
         "class":"text-nowrap",
         "render": function(data, type, row, meta){
-          return row.nama_organisasi;
-        }
-      },
-      {
-        "targets": 6,
-        "class":"text-nowrap",
-        "render": function(data, type, row, meta){
           return row.provider;
         }
       },
       {
-        "targets": 7,
+        "targets": 6,
         "class":"text-nowrap",
         "sortable":false,
         "render": function(data, type, row, meta){
@@ -391,7 +332,7 @@
         }
       },
       {
-        "targets": 8,
+        "targets": 7,
         "sortable":false,
         "render": function(data, type, row, meta){
           let tampilan = `
@@ -456,7 +397,6 @@
     $("#form-edit [name='telp']").val(karyawan.telp)
     $("#form-edit [name='provider']").val(karyawan.provider)
     $("#form-edit [name='status']").val(karyawan.status)
-    $("#form-edit [name='organisasi_id']").val(karyawan.organisasi_id)
   }
 
   $("#form-edit").on('submit',function(e){
