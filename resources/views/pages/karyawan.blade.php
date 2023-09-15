@@ -118,7 +118,7 @@
                 <div class="col-md-4">
                   <label>MERK METER</label>
                   <select id="filter-organisasi" class="form-control filter">
-                    <option value="">Pilih Organisasi</option>
+                    <option value="">Pilih MERK METER</option>
                     @foreach($list_organisasi as $organisasi)
                     <option value="{{$organisasi->id}}">{{$organisasi->nama}}</option>
                     @endforeach
@@ -127,17 +127,17 @@
                 <div class="col-md-4">
                   <label>MERK COMM DEVICE</label>
                   <select id="filter-bpjs-kesehatan" class="form-control filter">
-                    <option value="">Filter BPJS Kesehatan</option>
-                    <option value="1">BPJS Kesehatan Terdaftar</option>
-                    <option value="0">BPJS Kesehatan Belum Terdaftar</option>
+                    <option value="">Filter MERK COMM DEVICE</option>
+                    <option value="1">MERK COMM DEVICE Terdaftar</option>
+                    <option value="0">MERK COMM DEVICE Belum Terdaftar</option>
                   </select>
                 </div>
                 <div class="col-md-4">
-                  <label>BPJS Ketenagakerjaan</label>
+                  <label>MODEM MLIS</label>
                   <select id="filter-bpjs-ketenagakerjaan" class="form-control filter">
-                    <option value="">Filter BPJS Ketenagakerjaan</option>
-                    <option value="1">BPJS Ketenagakerjaan Terdaftar</option>
-                    <option value="0">BPJS Ketenagakerjaan Belum Terdaftar</option>
+                    <option value="">Filter MODEM MLIS</option>
+                    <option value="1">MODEM MLIS Terdaftar</option>
+                    <option value="0">MODEM MLIS Belum Terdaftar</option>
                   </select>
                 </div>
               </div>
