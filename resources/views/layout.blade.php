@@ -99,7 +99,7 @@
             <a href="#" class="nav-link <?=$PARENTTAG=='karyawan'?'active':''?>">
               <i class="nav-icon fas fa-users"></i>
               <p>
-                Pelanggan
+              Pelanggan
                 <i class="right fas fa-angle-left"></i>
               </p>
             </a>
@@ -154,7 +154,7 @@
             <a href="{{url('')}}/logout" class="nav-link">
               <i class="nav-icon fas fa-chevron-right"></i>
               <p>
-                Keluar
+                Logout
               </p>
             </a>
           </li>

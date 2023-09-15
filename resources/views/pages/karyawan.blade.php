@@ -13,12 +13,12 @@
     <div class="container-fluid">
       <div class="row mb-2">
         <div class="col-sm-6">
-          <h1 class="m-0 text-dark">Pelanggan {{$jenis}}</h1>
+          <h1 class="m-0 text-dark">pelanggan {{$jenis}}</h1>
         </div><!-- /.col -->
         <div class="col-sm-6">
           <ol class="breadcrumb float-sm-right">
             <li class="breadcrumb-item"><a href="#">Home</a></li>
-            <li class="breadcrumb-item active">Pelanggan</li>
+            <li class="breadcrumb-item active">pelanggan</li>
           </ol>
         </div><!-- /.col -->
       </div><!-- /.row -->
@@ -28,116 +28,79 @@
     <div class="container-fluid">
       <div class="row">
         <div class="col-md-12">
-        <button class="btn btn-primary" style="margin-bottom: 1rem;" data-toggle="modal" data-target="#modal-create">Tambah Pelanggan</button>
-          <button class="btn btn-primary" style="margin-bottom: 1rem;" data-toggle="modal" data-target="#modal-create-2" id="open-send-modal">Send</button>
-          <button class="btn btn-warning" style="margin-bottom: 1rem;" data-toggle="modal" data-target="#modal-import">Import Pelanggan Excel</button>
-          <a download class="btn btn-success" style="margin-bottom: 1rem;" href="{{url('')}}/karyawan/export">Export Pelanggan Excel</a>
+          <button class="btn btn-primary" style="margin-bottom: 1rem;" data-toggle="modal" data-target="#modal-create">Tambah pelanggan</button>
+          <button class="btn btn-warning" style="margin-bottom: 1rem;" data-toggle="modal" data-target="#modal-import">Import pelanggan Excel</button>
+          <a download class="btn btn-success" style="margin-bottom: 1rem;" href="{{url('')}}/karyawan/export">Export pelanggan Excel</a>
           @if($CHILDTAG=='aktif')
           <button type="button" id="button-nonaktif-all" disabled onclick="nonAktifkanTerpilih()" class="btn btn-danger" style="margin-bottom: 1rem;">Non Aktifkan</button>
           @else
           <button type="button" id="button-aktif-all" disabled onclick="aktifkanTerpilih()" class="btn btn-danger" style="margin-bottom: 1rem;">Aktifkan</button>
           @endif
-          <button disabled type="button" class="btn btn-success" style="margin-bottom: 1rem;" id="button-export-terpilih" onclick="exportKaryawanTerpilih()">Export Pelanggan Terpilih</button>
+          <button disabled type="button" class="btn btn-success" style="margin-bottom: 1rem;" id="button-export-terpilih" onclick="exportKaryawanTerpilih()">Export pelanggan Terpilih</button>
           <div class="card">
             <div class="card-header">
-              <h3 class="card-title">Data Pelanggan</h3>
+              <h3 class="card-title">Data pelanggan</h3>
             </div>
             <div class="card-body">
               <div class="row" id="row-tampilan">
                 <div class="col-md-12">
-                <h4>Pilih Tampilan</h4>
+                  <h4>Pilih Tampilan</h4>
                 </div>
                 <div class="col-md-3">
                   <label>
-                    <input type="checkbox" class="tampilan" data-kolom="1" checked="true"> id_pelanggan
+                    <input type="checkbox" class="tampilan" data-kolom="1" checked="true"> merk comm device
                   </label>
                   <label>
-                    <input type="checkbox" class="tampilan" data-kolom="2" checked="true"> name
+                    <input type="checkbox" class="tampilan" data-kolom="2" checked="true"> Nama
                   </label>
                   <label>
-                    <input type="checkbox" class="tampilan" data-kolom="3" checked="true"> address
-                  </label>
-                </div>
-                <div class="col-md-3">
-                  <label>
-                    <input type="checkbox" class="tampilan" data-kolom="4" checked="true"> tariff
-                  </label>
-                  <label>
-                    <input type="checkbox" class="tampilan" data-kolom="5" checked="true"> daya
-                  </label>
-                  <label>
-                    <input type="checkbox" class="tampilan" data-kolom="6"> no_meter
+                    <input type="checkbox" class="tampilan" data-kolom="3" checked="true"> merk meter
                   </label>
                 </div>
                 <div class="col-md-3">
                   <label>
-                    <input type="checkbox" class="tampilan" data-kolom="7"> merk_meter
+                    <input type="checkbox" class="tampilan" data-kolom="4" checked="true"> Telp
                   </label>
                   <label>
-                    <input type="checkbox" class="tampilan" data-kolom="8"> type_meter
+                    <input type="checkbox" class="tampilan" data-kolom="5" checked="true"> Organisasi
                   </label>
                   <label>
-                    <input type="checkbox" class="tampilan" data-kolom="9"> no_comm_device
+                    <input type="checkbox" class="tampilan" data-kolom="6"> provider
                   </label>
                 </div>
                 <div class="col-md-3">
-                <label>
-                    <input type="checkbox" class="tampilan" data-kolom="10"> merk_comm_device
-                  </label>
                   <label>
-                    <input type="checkbox" class="tampilan" data-kolom="11"> type_comm_device
-                  </label>
-                  <label>
-                    <input type="checkbox" class="tampilan" data-kolom="12"> port
-                  </label>
-                </div>
-                <div class="col-md-3">
-                <label>
-                    <input type="checkbox" class="tampilan" data-kolom="13"> phone
-                  </label>
-                  <label>
-                    <input type="checkbox" class="tampilan" data-kolom="14"> provider
-                  </label>
-                  <label>
-                    <input type="checkbox" class="tampilan" data-kolom="15"> ip_address
-                  </label>
-                </div>
-                <div class="col-md-3">
-                <label>
-                    <input type="checkbox" class="tampilan" data-kolom="16"> BPJS Kesehatan
-                  </label>
-                  <label>
-                    <input type="checkbox" class="tampilan" data-kolom="17"> BPJS Ketenagakerjaan
+                    <input type="checkbox" class="tampilan" data-kolom="7"> ip_address
                   </label>
                 </div>
               </div>
               <div class="row">
                 <div class="col-md-12">
-                  <h4>Filter Pelanggan</h4>
+                  <h4>Filter pelanggan</h4>
                 </div>
                 <div class="col-md-4">
-                  <label>MERK METER</label>
+                  <label>Organisasi</label>
                   <select id="filter-organisasi" class="form-control filter">
-                    <option value="">Pilih MERK METER</option>
+                    <option value="">Pilih Organisasi</option>
                     @foreach($list_organisasi as $organisasi)
                     <option value="{{$organisasi->id}}">{{$organisasi->nama}}</option>
                     @endforeach
                   </select>
                 </div>
                 <div class="col-md-4">
-                  <label>MERK COMM DEVICE</label>
+                  <label>BPJS Kesehatan</label>
                   <select id="filter-bpjs-kesehatan" class="form-control filter">
-                    <option value="">Filter MERK COMM DEVICE</option>
-                    <option value="1">MERK COMM DEVICE Terdaftar</option>
-                    <option value="0">MERK COMM DEVICE Belum Terdaftar</option>
+                    <option value="">Filter BPJS Kesehatan</option>
+                    <option value="1">BPJS Kesehatan Terdaftar</option>
+                    <option value="0">BPJS Kesehatan Belum Terdaftar</option>
                   </select>
                 </div>
                 <div class="col-md-4">
-                  <label>MODEM MLIS</label>
+                  <label>BPJS Ketenagakerjaan</label>
                   <select id="filter-bpjs-ketenagakerjaan" class="form-control filter">
-                    <option value="">Filter MODEM MLIS</option>
-                    <option value="1">MODEM MLIS Terdaftar</option>
-                    <option value="0">MODEM MLIS Belum Terdaftar</option>
+                    <option value="">Filter BPJS Ketenagakerjaan</option>
+                    <option value="1">BPJS Ketenagakerjaan Terdaftar</option>
+                    <option value="0">BPJS Ketenagakerjaan Belum Terdaftar</option>
                   </select>
                 </div>
               </div>
@@ -149,22 +112,13 @@
                     <th>
                       <input type="checkbox" id="head-cb">
                     </th>
-                    <th>NO</th>
-                    <th>ID</th>
-                    <th>NAME</th>
-                    <th>ADDRESS</th>
-                    <th>TARIFF</th>
-                    <th>DAYA</th>
-                    <th>N.MTR</th>
-                    <th>M.MTR</th>
-                    <th>T.MTR</th>
-                    <th>N.CM.DVC</th>
-                    <th>M.CM.DVC</th>
-                    <th>T.CM.DVC</th>
-                    <th>PORT</th>
-                    <th>PHONE</th>
-                    <th>PROVIDER</th>
-                    <th>IP</th>
+                    <th>merk comm device</th>
+                    <th>Nama</th>
+                    <th>merk meter</th>
+                    <th>TELP</th>
+                    <th>ORGANISASI</th>
+                    <th>provider</th>
+                    <th>ip_address</th>
                     <th>###</th>
                   </tr>
                   </thead>
@@ -182,71 +136,33 @@
     <div class="modal-dialog modal-lg">
       <form method="post" id="form-create" action="{{url('karyawan')}}" enctype="multipart/form-data" class="modal-content">
         <div class="modal-header">
-          <h4 class="modal-title">Tambah Data Pelanggan Baru</h4>
+          <h4 class="modal-title">Tambah Data pelanggan Baru</h4>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
         <div class="modal-body">
-        <div class="col-md-12">
-              <label>ID_PELANGGAN <small class="text-danger">*</small></label>
-              <input type="text" name="id_pelanggan" class="form-control" required>
+          {{csrf_field()}}
+          <div class="row">
+            <div class="col-md-12">
+              <label>Nama <small class="text-danger">*</small></label>
+              <input type="text" name="nama" class="form-control" required>
             </div>
             <div class="col-md-12">
-              <label>NAME <small class="text-danger">*</small></label>
-              <input type="text" name="name" class="form-control" required>
+              <label>MERK METER <small class="text-danger">*</small></label>
+              <input type="text" name="merk_meter" class="form-control" required>
             </div>
             <div class="col-md-12">
-              <label>ADDRESS <small class="text-danger">*</small></label>
-              <input type="text" name="address" class="form-control" required>
+              <label>MERK COMM DEVICE <small class="text-danger">*</small></label>
+              <input type="text" name="merk_comm_device" class="form-control" required>
             </div>
             <div class="col-md-12">
-              <label>TARIFF <small class="text-danger">*</small></label>
-              <input type="text" name="tariff" class="form-control" required>
+              <label>Telp <small class="text-danger">*</small></label>
+              <input type="text" name="telp" class="form-control" required>
             </div>
             <div class="col-md-12">
-              <label>DAYA <small class="text-danger">*</small></label>
-              <input type="text" name="daya" class="form-control" required>
-            </div>
-            <div class="col-md-12">
-              <label>N.MTR</label>
-              <input type="text" name="no_meter" class="form-control">
-            </div>
-            <div class="col-md-12">
-              <label>M.MTR</label>
-              <input type="text" name="merk_meter" class="form-control">
-            </div>
-            <div class="col-md-12">
-              <label>T.MTR</label>
-              <input type="text" name="type_meter" class="form-control">
-            </div>
-            <div class="col-md-12">
-              <label>N.CM.DVC</label>
-              <input type="text" name="no_comm_device" class="form-control">
-            </div>
-            <div class="col-md-12">
-              <label>M.CM.DVC</label>
-              <input type="email" name="merk_comm_device" class="form-control">
-            </div>
-            <div class="col-md-12">
-              <label>T.CM.DVC</label>
-              <input type="email" name="type_comm_device" class="form-control">
-            </div>
-            <div class="col-md-12">
-              <label>PORT <small class="text-danger">*</small></label>
-              <input type="text" name="port" class="form-control" required>
-            </div>
-            <div class="col-md-12">
-              <label>PHONE <small class="text-danger">*</small></label>
-              <input type="text" name="phone" class="form-control" required>
-            </div>
-            <div class="col-md-12">
-              <label>PROVIDER <small class="text-danger">*</small></label>
-              <input type="text" name="provider" class="form-control" required>
-            </div>
-            <div class="col-md-12">
-              <label>IP <small class="text-danger">*</small></label>
-              <input type="text" name="ip_address" class="form-control" required>
+              <label>provider</label>
+              <input type="text" name="provider" class="form-control">
             </div>
             <div class="col-md-12">
               <label>Status</label>
@@ -254,14 +170,6 @@
                 <option value="aktif">Aktif</option>
                 <option value="non aktif">Non Aktif</option>
               </select>
-            </div>
-            <div class="col-md-12">
-              <label>Nomor BPJS Kesehatan</label>
-              <input type="text" name="nomor_bpjs_kesehatan" class="form-control">
-            </div>
-            <div class="col-md-12">
-              <label>Nomor BPJS Ketenagakerjaan</label>
-              <input type="text" name="nomor_bpjs_ketenagakerjaan" class="form-control">
             </div>
             <div class="col-md-12">
               <label>Organisasi</label>
@@ -273,7 +181,7 @@
               </select>
             </div>
             <div class="col-md-12" style="margin-top: 4px;">
-              <input type="file" name="foto" accept="image/*">
+              <input type="file" name="ip_address" accept="image/*">
             </div>
           </div>
         </div>
@@ -284,64 +192,12 @@
       </form>
     </div>
   </div>
-  
-  <div class="modal fade" id="modal-create-2">
-    <div class="modal-dialog modal-lg">
-        <form method="post" id="form-create" action="{{url('karyawan')}}" enctype="multipart/form-data" class="modal-content">
-            <div class="modal-header">
-                <h4 class="modal-title">Kirim sms</h4>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                {{csrf_field()}}
-                <div class="row">
-
-                    <div class="col-md-12">
-                        <label>Nomor Telepon <small class="text-danger">*</small></label>
-                        <input type="text" name="nomor_telepon" class="form-control" required>
-                    </div>
-                </div>
-            </div>
-            <div class="modal-footer justify-content-between">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Tutup</button>
-                <button type="button" class="btn btn-primary" onclick="kirimSMS()">Kirim SMS</button>
-            </div>
-        </form>
-    </div>
-</div>
-
-<script>
-    function kirimSMS() {
-        // Ambil nomor telepon dari input
-        var nomorTelepon = $("input[name='nomor_telepon']").val();
-
-        // Kirim SMS menggunakan Twilio
-        $.ajax({
-            type: "POST",
-            url: "/kirim-sms", // Ganti dengan URL yang benar
-            data: { nomor_telepon: nomorTelepon, _token: "{{ csrf_token() }}" },
-            success: function (response) {
-                // Tangani respons atau tindakan yang sesuai di sini
-                console.log(response);
-
-                // Tutup modal
-                $("#modal-create-2").modal("hide");
-            },
-            error: function (error) {
-                // Tangani kesalahan jika ada
-                console.log(error);
-            },
-        });
-    }
-</script>
 
   <div class="modal fade" id="modal-edit">
     <div class="modal-dialog modal-lg">
       <form method="post" id="form-edit" action="{{url('karyawan')}}" enctype="multipart/form-data" class="modal-content">
         <div class="modal-header">
-          <h4 class="modal-title">Edit Data Pelanggan Baru</h4>
+          <h4 class="modal-title">Edit Data pelanggan Baru</h4>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
@@ -351,65 +207,25 @@
           <input type="hidden" name="id">
           {{method_field('PATCH')}}
           <div class="row">
-          <div class="col-md-12">
-              <label>ID_PELANGGAN <small class="text-danger">*</small></label>
-              <input type="text" name="id_pelanggan" class="form-control" required>
+            <div class="col-md-12">
+              <label>Nama <small class="text-danger">*</small></label>
+              <input type="text" name="nama" class="form-control" required>
             </div>
             <div class="col-md-12">
-              <label>NAME <small class="text-danger">*</small></label>
-              <input type="text" name="name" class="form-control" required>
+              <label>MERK METER <small class="text-danger">*</small></label>
+              <input type="text" name="merk_meter" class="form-control" required>
             </div>
             <div class="col-md-12">
-              <label>ADDRESS <small class="text-danger">*</small></label>
-              <input type="text" name="address" class="form-control" required>
+              <label>MERK COMM DEVICE <small class="text-danger">*</small></label>
+              <input type="text" name="merk_comm_device" class="form-control" required>
             </div>
             <div class="col-md-12">
-              <label>TARIFF <small class="text-danger">*</small></label>
-              <input type="text" name="tariff" class="form-control" required>
+              <label>Telp <small class="text-danger">*</small></label>
+              <input type="text" name="telp" class="form-control" required>
             </div>
             <div class="col-md-12">
-              <label>DAYA <small class="text-danger">*</small></label>
-              <input type="text" name="daya" class="form-control" required>
-            </div>
-            <div class="col-md-12">
-              <label>N.MTR</label>
-              <input type="text" name="no_meter" class="form-control">
-            </div>
-            <div class="col-md-12">
-              <label>M.MTR</label>
-              <input type="text" name="merk_meter" class="form-control">
-            </div>
-            <div class="col-md-12">
-              <label>T.MTR</label>
-              <input type="text" name="type_meter" class="form-control">
-            </div>
-            <div class="col-md-12">
-              <label>N.CM.DVC</label>
-              <input type="text" name="no_comm_device" class="form-control">
-            </div>
-            <div class="col-md-12">
-              <label>M.CM.DVC</label>
-              <input type="email" name="merk_comm_device" class="form-control">
-            </div>
-            <div class="col-md-12">
-              <label>T.CM.DVC</label>
-              <input type="email" name="type_comm_device" class="form-control">
-            </div>
-            <div class="col-md-12">
-              <label>PORT <small class="text-danger">*</small></label>
-              <input type="text" name="port" class="form-control" required>
-            </div>
-            <div class="col-md-12">
-              <label>PHONE <small class="text-danger">*</small></label>
-              <input type="text" name="phone" class="form-control" required>
-            </div>
-            <div class="col-md-12">
-              <label>PROVIDER <small class="text-danger">*</small></label>
-              <input type="text" name="provider" class="form-control" required>
-            </div>
-            <div class="col-md-12">
-              <label>IP <small class="text-danger">*</small></label>
-              <input type="text" name="ip_address" class="form-control" required>
+              <label>provider</label>
+              <input type="text" name="provider" class="form-control">
             </div>
             <div class="col-md-12">
               <label>Status</label>
@@ -417,14 +233,6 @@
                 <option value="aktif">Aktif</option>
                 <option value="non aktif">Non Aktif</option>
               </select>
-            </div>
-            <div class="col-md-12">
-              <label>Nomor BPJS Kesehatan</label>
-              <input type="text" name="nomor_bpjs_kesehatan" class="form-control">
-            </div>
-            <div class="col-md-12">
-              <label>Nomor BPJS Ketenagakerjaan</label>
-              <input type="text" name="nomor_bpjs_ketenagakerjaan" class="form-control">
             </div>
             <div class="col-md-12">
               <label>Organisasi</label>
@@ -436,7 +244,7 @@
               </select>
             </div>
             <div class="col-md-12" style="margin-top: 4px;">
-              <input type="file" name="foto" accept="image/*">
+              <input type="file" name="ip_address" accept="image/*">
             </div>
           </div>
         </div>
@@ -452,7 +260,7 @@
     <div class="modal-dialog modal-lg">
       <form method="post" id="form-import" action="{{url('karyawan')}}" enctype="multipart/form-data" class="modal-content">
         <div class="modal-header">
-          <h4 class="modal-title">Import Data Pelanggan</h4>
+          <h4 class="modal-title">Import Data pelanggan</h4>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
@@ -462,10 +270,10 @@
           {{csrf_field()}}
           <div class="row">
             <div class="col-md-12">
-              <p>Import data Pelanggan sesuai format contoh berikut.<br/><a href="{{url('')}}/excel-karyawan.xlsx"><i class="fas fa-download"></i> File Contoh Excel Karyawan</a></p>
+              <p>Import data pelanggan sesuai format contoh berikut.<br/><a href="{{url('')}}/excel-karyawan.xlsx"><i class="fas fa-download"></i> File Contoh Excel pelanggan</a></p>
             </div>
             <div class="col-md-12">
-              <label>File Excel Pelanggan</label>
+              <label>File Excel pelanggan</label>
               <input type="file" name="excel-karyawan" required>
             </div>
           </div>
@@ -488,8 +296,6 @@
 <script type="text/javascript">
   let list_karyawan = [];
   let organisasi = $("#filter-organisasi").val()
-  ,bpjs_kesehatan = $("#filter-bpjs-kesehatan").val()
-  ,bpjs_ketenagakerjaan = $("#filter-bpjs-ketenagakerjaan").val()
   
   const table = $('#table').DataTable({
     "pageLength": 100,
@@ -506,8 +312,6 @@
       type: "POST",
       data:function(d){
         d.organisasi = organisasi;
-        d.bpjs_kesehatan = bpjs_kesehatan;
-        d.bpjs_ketenagakerjaan = bpjs_ketenagakerjaan;
         return d
       }
     },
@@ -536,28 +340,28 @@
         "class":"text-nowrap",
         "render": function(data, type, row, meta){
           list_karyawan[row.id] = row;
-          return row.id_pelanggan;
+          return row.merk_comm_device;
         }
       },
       {
         "targets": 2,
         "class":"text-nowrap",
         "render": function(data, type, row, meta){
-          return row.name;
+          return row.nama;
         }
       },
       {
         "targets": 3,
         "class":"text-nowrap",
         "render": function(data, type, row, meta){
-          return row.address;
+          return row.merk_meter;
         }
       },
       {
         "targets": 4,
         "class":"text-nowrap",
         "render": function(data, type, row, meta){
-          return row.tariff;
+          return row.telp;
         }
       },
       {
@@ -571,105 +375,35 @@
         "targets": 6,
         "class":"text-nowrap",
         "render": function(data, type, row, meta){
-          return row.daya;
+          return row.provider;
         }
       },
       {
         "targets": 7,
         "class":"text-nowrap",
+        "sortable":false,
         "render": function(data, type, row, meta){
-          return row.no_meter;
+          if(row.ip_address==null){
+            return `<img style="max-width:85px;max-height:85px;" src="{{url('')}}/dist/img/default.png"/>`
+          }else{
+            return `<a href="{{url('')}}/karyawan/ip_address/${row.id}" target="_blank"><img style="max-width:85px;max-height:85px;" src="{{url('')}}/karyawan/ip_address/${row.id}"/></a>`
+          }
         }
       },
       {
         "targets": 8,
-        "class":"text-nowrap",
-        "render": function(data, type, row, meta){
-          return row.merk_meter;
-        }
-      },
-      {
-        "targets": 9,
-        "class":"text-nowrap",
-        "render": function(data, type, row, meta){
-          return row.type_meter;
-        }
-      },
-      {
-        "targets": 10,
-        "class":"text-nowrap",
-        "render": function(data, type, row, meta){
-          return row.no_comm_device;
-        }
-      },
-      {
-        "targets": 11,
-        "class":"text-nowrap",
-        "render": function(data, type, row, meta){
-          return row.merk_comm_device;
-        }
-      },
-      {
-        "targets": 12,
-        "class":"text-nowrap",
-        "render": function(data, type, row, meta){
-          return row.type_comm_device;
-        }
-      },
-      {
-        "targets": 13,
-        "class":"text-nowrap",
-        "render": function(data, type, row, meta){
-          return row.port;
-        }
-      },
-      {
-        "targets": 14,
-        "class":"text-nowrap",
-        "render": function(data, type, row, meta){
-          return row.phone;
-        }
-      },
-      {
-        "targets": 15,
-        "class":"text-nowrap",
-        "render": function(data, type, row, meta){
-          return row.provider;
-        }
-      },
-      {
-        "targets": 16,
-        "class":"text-nowrap",
-        "render": function(data, type, row, meta){
-          return row.ip_address;
-        }
-      },
-      {
-        "targets": 17,
-        "class":"text-nowrap",
-        "render": function(data, type, row, meta){
-          return row.nomor_bpjs_kesehatan;
-        }
-      },
-      {
-        "targets": 18,
-        "class":"text-nowrap",
-        "render": function(data, type, row, meta){
-          return row.nomor_bpjs_ketenagakerjaan;
-        }
-      },
-      {
-        "targets": 19,
         "sortable":false,
         "render": function(data, type, row, meta){
-          let tampilan = '';
-tampilan += `<button onclick="showDetailKaryawan('${row.id}')" class="btn btn-sm btn-warning btn-block">Edit</button>`;
-if (row.status == 'aktif') {
-  tampilan += `<button onclick="toggleStatus('${row.id}')" class="btn btn-sm btn-danger btn-block">Nonaktifkan</button>`;
-} else {
-  tampilan += `<button onclick="toggleStatus('${row.id}')" class="btn btn-sm btn-success btn-block">Aktifkan</button>`;
-}
-return tampilan;
+          let tampilan = `
+            <a target="_blank" href="{{url('')}}/karyawan/download_pdf/${row.id}" class="btn btn-sm btn-primary btn-block">Download Pdf</a>
+            <button onclick="showDetailKaryawan('${row.id}')" class="btn btn-sm btn-warning btn-block">Edit</button>
+          `;
+          if(row.status=='aktif'){
+            tampilan+=`<button onclick="toggleStatus('${row.id}')" class="btn btn-sm btn-danger btn-block">Nonaktifkan</button>`
+          }else{
+            tampilan+=`<button onclick="toggleStatus('${row.id}')" class="btn btn-sm btn-success btn-block">Aktifkan</button>`
+          }
+          return tampilan;
         }
       }
       
@@ -716,24 +450,12 @@ return tampilan;
 
 
     $("#form-edit [name='id']").val(id)
-    $("#form-edit [name='id_pelanggan']").val(karyawan.id_pelanggan)
-    $("#form-edit [name='name']").val(karyawan.name)
-    $("#form-edit [name='address']").val(karyawan.address)
-    $("#form-edit [name='tariff']").val(karyawan.tariff)
-    $("#form-edit [name='daya']").val(karyawan.daya)
-    $("#form-edit [name='no_meter']").val(karyawan.no_meter)
+    $("#form-edit [name='nama']").val(karyawan.nama)
     $("#form-edit [name='merk_meter']").val(karyawan.merk_meter)
-    $("#form-edit [name='type_meter']").val(karyawan.type_meter)
-    $("#form-edit [name='no_comm_device']").val(karyawan.no_comm_device)
     $("#form-edit [name='merk_comm_device']").val(karyawan.merk_comm_device)
-    $("#form-edit [name='type_comm_device']").val(karyawan.type_comm_device)
-    $("#form-edit [name='port']").val(karyawan.port)
-    $("#form-edit [name='phone']").val(karyawan.phone)
+    $("#form-edit [name='telp']").val(karyawan.telp)
     $("#form-edit [name='provider']").val(karyawan.provider)
-    $("#form-edit [name='ip_address']").val(karyawan.ip_address)
     $("#form-edit [name='status']").val(karyawan.status)
-    $("#form-edit [name='nomor_bpjs_kesehatan']").val(karyawan.nomor_bpjs_kesehatan)
-    $("#form-edit [name='nomor_bpjs_ketenagakerjaan']").val(karyawan.nomor_bpjs_ketenagakerjaan)
     $("#form-edit [name='organisasi_id']").val(karyawan.organisasi_id)
   }
 
@@ -742,7 +464,7 @@ return tampilan;
     $("#form-edit").ajaxSubmit({
       success:function(res){
         if(res===true){
-          alert("BERHASIL UPDATE PELANGGAN")
+          alert("BERHASIL UPDATE KARYAWAN")
           table.ajax.reload(null,false)
           $("#modal-edit").modal('hide')
         }
@@ -828,14 +550,12 @@ return tampilan;
         $("#head-cb").prop('checked',false)
       }
     })
-    console.log(semua_id)
-    console.log("YANG TERPILIH AKAN DINONAKTIFKAN")
+    // console.log(semua_id)
+    // console.log("YANG TERPILIH AKAN DINONAKTIFKAN")
   }
 
   $(".filter").on('change',function(){
     organisasi = $("#filter-organisasi").val()
-    bpjs_kesehatan = $("#filter-bpjs-kesehatan").val()
-    bpjs_ketenagakerjaan = $("#filter-bpjs-ketenagakerjaan").val()
     table.ajax.reload(null,false)
   })
 

@@ -24,23 +24,13 @@ class KaryawanExport implements FromQuery, WithHeadings, WithMapping
 	public function headings(): array
     {
         return [
-            'id',
-            'id_pelanggan',
-            'name',
-            'address',
-            'tariff',
-            'daya',
-            'no_meter',
-            'merk_meter',
-            'type_meter',
-            'no_comm_device',
-            'merk_comm_device',
-            'type_comm_device',
-            'port',
-            'phone',
-            'provider',
-            'ip_address',
-            'status'
+            'nama',
+			'merk_meter',
+			'merk_comm_device',
+			'telp',
+			'provider',
+			'status',
+			'organisasi_id'
         ];
     }
     /**
@@ -49,22 +39,13 @@ class KaryawanExport implements FromQuery, WithHeadings, WithMapping
     public function map($karyawan): array
     {
         return [
-            $karyawan->id_pelanggan,
-            $karyawan->name,
-            $karyawan->address,
-            $karyawan->tariff,
-            $karyawan->daya,
-            $karyawan->no_meter,
+            $karyawan->nama,
             $karyawan->merk_meter,
-            $karyawan->type_meter,
-            $karyawan->no_comm_device,
             $karyawan->merk_comm_device,
-            $karyawan->type_comm_device,
-            $karyawan->port,
-            $karyawan->phone,
+            $karyawan->telp,
             $karyawan->provider,
-            $karyawan->ip_address,
             $karyawan->status,
+            $karyawan->organisasi_id,
         ];
     }
 }

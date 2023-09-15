@@ -15,24 +15,13 @@ class CreateKaryawanTable extends Migration
     {
         Schema::create('karyawan', function (Blueprint $table) {
             $table->id();
-            $table->string('id_pelanggan')->nullable(false);
-            $table->string('name')->nullable(false);
-            $table->string('address')->nullable(false);
-            $table->string('tariff')->nullable(false);
-            $table->string('daya')->nullable(false);
-            $table->string('no_meter')->nullable(false);
-            $table->string('merk_meter')->nullable(false);
-            $table->string('type_meter')->nullable(false);
-            $table->string('no_comm_device')->nullable(false);
-            $table->string('merk_comm_device')->nullable(false);
-            $table->string('type_comm_device')->nullable(false);
-            $table->string('port')->nullable(false);
-            $table->string('phone')->nullable(false);
-            $table->string('provider')->nullable(false);
-            $table->string('ip_address')->nullable(false);
+            $table->string('nama')->nullable(false);
+            $table->string('merk_meter',50)->nullable();
+            $table->string('merk_comm_device',50)->nullable(false)->unique();
+            $table->string('telp',20)->nullable();
+            $table->string('provider',100)->nullable();
+            $table->string('ip_address')->nullable();
             $table->enum('status',['aktif','non aktif'])->default('aktif');
-            $table->string('nomor_bpjs_kesehatan',20)->nullable();
-            $table->string('nomor_bpjs_ketenagakerjaan',20)->nullable();
             $table->timestamps();
             $table->softDeletes('deleted_at', 0);
         });

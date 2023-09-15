@@ -24,16 +24,16 @@ class KaryawanController extends Controller
     public function data(Request $request,$jenis)
     {
         $jenis = str_replace('-', ' ', $jenis);
-    	$orderBy = 'karyawan.nik';
+    	$orderBy = 'karyawan.merk_comm_device';
         switch($request->input('order.0.column')){
             case "1":
-                $orderBy = 'karyawan.nik';
+                $orderBy = 'karyawan.merk_comm_device';
                 break;
             case "2":
                 $orderBy = 'karyawan.nama';
                 break;
             case "3":
-                $orderBy = 'karyawan.nomor_ktp';
+                $orderBy = 'karyawan.merk_meter';
                 break;
             case "4":
                 $orderBy = 'karyawan.telp';
@@ -42,19 +42,10 @@ class KaryawanController extends Controller
                 $orderBy = 'organisasi.nama';
                 break;
             case "6":
-                $orderBy = 'karyawan.email';
+                $orderBy = 'karyawan.provider';
                 break;
             case "7":
-                $orderBy = 'karyawan.detail_alamat';
-                break;
-            case "8":
-                $orderBy = 'karyawan.foto';
-                break;
-            case "9":
-                $orderBy = 'karyawan.nomor_bpjs_kesehatan';
-                break;
-            case "10":
-                $orderBy = 'karyawan.nomor_bpjs_ketenagakerjaan';
+                $orderBy = 'karyawan.ip_address';
                 break;
         }
 
@@ -68,9 +59,9 @@ class KaryawanController extends Controller
 
         if($request->input('search.value')!=null){
             $data = $data->where(function($q)use($request){
-                $q->whereRaw('LOWER(karyawan.nik) like ? ',['%'.strtolower($request->input('search.value')).'%'])
+                $q->whereRaw('LOWER(karyawan.merk_comm_device) like ? ',['%'.strtolower($request->input('search.value')).'%'])
                 ->orWhereRaw('LOWER(karyawan.nama) like ? ',['%'.strtolower($request->input('search.value')).'%'])
-                ->orWhereRaw('LOWER(karyawan.nomor_ktp) like ? ',['%'.strtolower($request->input('search.value')).'%'])
+                ->orWhereRaw('LOWER(karyawan.merk_meter) like ? ',['%'.strtolower($request->input('search.value')).'%'])
                 ->orWhereRaw('LOWER(karyawan.telp) like ? ',['%'.strtolower($request->input('search.value')).'%'])
                 ->orWhereRaw('LOWER(karyawan.status) like ? ',['%'.strtolower($request->input('search.value')).'%'])
                 ->orWhereRaw('LOWER(karyawan.status) like ? ',['%'.strtolower($request->input('search.value')).'%'])
@@ -81,20 +72,6 @@ class KaryawanController extends Controller
 
         if($request->input('organisasi')!=null){
             $data = $data->where('organisasi_id',$request->organisasi);
-        }
-        if($request->input('bpjs_kesehatan')!=null){
-            if($request->input('bpjs_kesehatan')==1){
-                $data = $data->whereNotNull('nomor_bpjs_kesehatan');
-            }else if($request->input('bpjs_kesehatan')==0){
-                $data = $data->whereNull('nomor_bpjs_kesehatan');
-            }
-        }
-        if($request->input('bpjs_ketenagakerjaan')!=null){
-            if($request->input('bpjs_ketenagakerjaan')==1){
-                $data = $data->whereNotNull('nomor_bpjs_ketenagakerjaan');
-            }else if($request->input('bpjs_ketenagakerjaan')==0){
-                $data = $data->whereNull('nomor_bpjs_ketenagakerjaan');
-            }
         }
 
         $recordsFiltered = $data->get()->count();
@@ -111,18 +88,18 @@ class KaryawanController extends Controller
 
     public function create(Request $request)
     {
-        #AMBIL SEMUA REQUEST KECUALI TOKEN DAN FOTO. SOALNYA FOTO = FILE BUKAN TEKS
-        $will_insert = $request->except(['foto','_token']);
+        #AMBIL SEMUA REQUEST KECUALI TOKEN DAN ip_address. SOALNYA ip_address = FILE BUKAN TEKS
+        $will_insert = $request->except(['ip_address','_token']);
 
-        #JIKA USER UPLOAD FOTO
-        if($request->hasFile('foto')){
-            $extension = $request->file('foto')->getClientOriginalExtension();#AMBIL EXTENSION
+        #JIKA USER UPLOAD ip_address
+        if($request->hasFile('ip_address')){
+            $extension = $request->file('ip_address')->getClientOriginalExtension();#AMBIL EXTENSION
             #STORE KE SOTRAGE
-            $path_foto = $request->file('foto')->storeAs(
-                'foto', $request->input('nik').'.'.$extension
+            $path_ip_address = $request->file('ip_address')->storeAs(
+                'ip_address', $request->input('merk_comm_device').'.'.$extension
             );
             #SET KE VARIABLE YANG AKAN DI INSERT KE KARYAWAN TABLE
-            $will_insert['foto'] = $path_foto;
+            $will_insert['ip_address'] = $path_ip_address;
         }
 
         Karyawan::create($will_insert);
@@ -132,16 +109,16 @@ class KaryawanController extends Controller
 
     public function edit(Request $request)
     {
-        $will_update = $request->except(['foto','_token','_method']);
-        #JIKA USER UPLOAD FOTO
-        if($request->hasFile('foto')){
-            $extension = $request->file('foto')->getClientOriginalExtension();#AMBIL EXTENSION
+        $will_update = $request->except(['ip_address','_token','_method']);
+        #JIKA USER UPLOAD ip_address
+        if($request->hasFile('ip_address')){
+            $extension = $request->file('ip_address')->getClientOriginalExtension();#AMBIL EXTENSION
             #STORE KE SOTRAGE
-            $path_foto = $request->file('foto')->storeAs(
-                'foto', $request->input('nik').'.'.$extension
+            $path_ip_address = $request->file('ip_address')->storeAs(
+                'ip_address', $request->input('merk_comm_device').'.'.$extension
             );
             #SET KE VARIABLE YANG AKAN DI INSERT KE KARYAWAN TABLE
-            $will_update['foto'] = $path_foto;
+            $will_update['ip_address'] = $path_ip_address;
         }
         Karyawan::where('id',$request->input('id'))->update($will_update);
 
@@ -204,11 +181,11 @@ class KaryawanController extends Controller
         return $pdf->stream('karyawan.pdf');
     }
 
-    public function getFoto(Request $request,$id)
+    public function getip_address(Request $request,$id)
     {
-        $karyawan = Karyawan::whereNotNull('foto')->find($id);
+        $karyawan = Karyawan::whereNotNull('ip_address')->find($id);
         if($karyawan == null) abort(404);
-        $path = storage_path('app/'.$karyawan->foto);
+        $path = storage_path('app/'.$karyawan->ip_address);
         // $file = \Storage::get($path);
         // $type = \Storage::mimeType($path);
         // $response = \Response::make($file, 200)->header("Content-Type", $type);

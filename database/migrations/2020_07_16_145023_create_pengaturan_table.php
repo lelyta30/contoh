@@ -16,8 +16,7 @@ class CreatePengaturanTable extends Migration
         Schema::create('pengaturan', function (Blueprint $table) {
             $table->string('nama_perusahaan');
             $table->string('logo');
-            $table->string('alamat');
-            $table->string('email');
+            $table->string('provider');
             $table->string('telp');
 
             $table->time('jam_masuk');
