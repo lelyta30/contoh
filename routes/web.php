@@ -15,15 +15,14 @@ Route::group(['middleware' => 'auth'], function () {
         return redirect('/karyawan/aktif');
     });
 
-    // Rute untuk mengirim SMS
-    Route::post('/send-sms', 'KaryawanController@sendSMS');
-
     // Rute untuk entitas Karyawan
     Route::any('/karyawan/data/{jenis}', 'KaryawanController@data');
     Route::get('/karyawan/export', 'KaryawanController@exportData');
     Route::post('/karyawan/export_terpilih', 'KaryawanController@exportDataTerpilih');
     Route::get('/karyawan/{jenis}', 'KaryawanController@index');
     Route::post('/karyawan', 'KaryawanController@create');
+        // Rute untuk mengirim SMS
+    Route::post('/karyawan/send', 'KaryawanController@send');
     Route::patch('/karyawan', 'KaryawanController@edit');
     Route::post('/karyawan/update_status', 'KaryawanController@updateStatus');
     Route::put('/karyawan', 'KaryawanController@importDataKaryawan');

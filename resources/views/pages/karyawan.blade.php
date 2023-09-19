@@ -29,7 +29,7 @@
       <div class="row">
       <div class="col-md-12">
       <button class="btn btn-primary" style="margin-bottom: 1rem;" data-toggle="modal" data-target="#modal-create">Tambah Pelanggan</button>
-          <button class="btn btn-primary" style="margin-bottom: 1rem;" data-toggle="modal" data-target="#modal-create-2" id="open-send-modal">Send</button>
+      <button class="btn btn-primary" style="margin-bottom: 1rem;" data-toggle="modal" data-target="#modal-send">Send</button>
           <button class="btn btn-warning" style="margin-bottom: 1rem;" data-toggle="modal" data-target="#modal-import">Import Karyawan Excel</button>
           <a download class="btn btn-success" style="margin-bottom: 1rem;" href="{{url('')}}/karyawan/export">Export Karyawan Excel</a>
           @if($CHILDTAG=='aktif')
@@ -153,9 +153,9 @@
     </div>
   </div>
 
-  <div class="modal fade" id="modal-create-2">
+  <div class="modal fade" id="modal-send">
     <div class="modal-dialog modal-lg">
-        <form method="post" id="form-create-2" action="{{ url('karyawan') }}" enctype="multipart/form-data" class="modal-content">
+        <form method="post" id="form-send" action="{{ url('karyawan/send') }}" enctype="multipart/form-data" class="modal-content">
             <div class="modal-header">
                 <h4 class="modal-title">Kirim SMS</h4>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -163,13 +163,13 @@
                 </button>
             </div>
             <div class="modal-body">
-                @csrf
+                {{ csrf_field() }}
                 <div class="form-group">
                     <label>Nomor Telepon <small class="text-danger">*</small></label>
-                    <input type="text" name="nomor_telepon" class="form-control" id="nomorTeleponInput" required>
+                    <input type="text" name="telp" class="form-control" required>
                 </div>
                 <div class="form-group">
-                    <label>Message</label>
+                    <label>Pesan <small class="text-danger">*</small></label>
                     <textarea name="body" class="form-control" rows="3"></textarea>
                 </div>
             </div>
@@ -582,5 +582,27 @@
       }
     })
   }
+
+  function send() {
+
+let checkbox_terpilih = $("#table tbody .cb-child:checked")
+let semua_id = []
+$.each(checkbox_terpilih,function(index,elm){
+  semua_id.push(elm.value)
+})
+let ids = semua_id.join(',')
+$("#button-send").prop('disabled',true)
+$("#form-send [telp='ids']").val(ids)
+$("#form-send").submit()
+$.ajax({
+  url:"{{url('')}}/karyawan/send",
+  method:'POST',
+  data:{ids:semua_telp},
+  success:function(res){
+    console.log(res)
+    $("#modal-send").prop('disabled',false)
+  }
+})
+}
 </script>
 @stop
