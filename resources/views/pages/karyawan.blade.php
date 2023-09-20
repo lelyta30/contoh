@@ -30,7 +30,7 @@
       <div class="col-md-12">
       <button class="btn btn-primary" style="margin-bottom: 1rem;" data-toggle="modal" data-target="#modal-create">Tambah Pelanggan</button>
       <button class="btn btn-primary" style="margin-bottom: 1rem;" data-toggle="modal" data-target="#modal-send">Send</button>
-          <button class="btn btn-warning" style="margin-bottom: 1rem;" data-toggle="modal" data-target="#modal-import">Import Karyawan Excel</button>
+      <button class="btn btn-warning" style="margin-bottom: 1rem;" data-toggle="modal" data-target="#modal-import">Import Karyawan Excel</button>
           <a download class="btn btn-success" style="margin-bottom: 1rem;" href="{{url('')}}/karyawan/export">Export Karyawan Excel</a>
           @if($CHILDTAG=='aktif')
           <button type="button" id="button-nonaktif-all" disabled onclick="nonAktifkanTerpilih()" class="btn btn-danger" style="margin-bottom: 1rem;">Non Aktifkan</button>
@@ -180,38 +180,6 @@
         </form>
     </div>
 </div>
-
-<script>
-    // Fungsi untuk mengirim SMS
-    function kirimSMS() {
-        // Dapatkan nilai dari input
-        var nomorTelepon = $('#nomorTeleponInput').val();
-
-        // Periksa apakah nilai tidak kosong
-        if (nomorTelepon.trim() === '') {
-            alert('Nomor Telepon harus diisi.');
-            return;
-        }
-
-        // Kirim SMS menggunakan Twilio (ganti '/kirim-sms' dengan URL yang sesungguhnya)
-        $.ajax({
-            type: 'POST',
-            url: '/kirim-sms',
-            data: { nomor_telepon: nomorTelepon, _token: '{{ csrf_token() }}' },
-            success: function (response) {
-                // Tangani respons atau tindakan yang sesuai di sini
-                console.log(response);
-
-                // Tutup modal
-                $('#modal-create-2').modal('hide');
-            },
-            error: function (error) {
-                // Tangani kesalahan jika ada
-                console.log(error);
-            },
-        });
-    }
-</script>
 
   <div class="modal fade" id="modal-edit">
     <div class="modal-dialog modal-lg">
